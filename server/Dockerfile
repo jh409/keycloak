@@ -24,6 +24,8 @@ ENV JDBC_MYSQL_VERSION 5.1.18
 
 ADD databases/change-database.sh /opt/jboss/keycloak/bin/change-database.sh
 
+ADD realm-export.json /opt/
+
 RUN mkdir -p /opt/jboss/keycloak/modules/system/layers/base/com/mysql/jdbc/main; cd /opt/jboss/keycloak/modules/system/layers/base/com/mysql/jdbc/main && curl -O http://central.maven.org/maven2/mysql/mysql-connector-java/$JDBC_MYSQL_VERSION/mysql-connector-java-$JDBC_MYSQL_VERSION.jar
 ADD databases/mysql/module.xml /opt/jboss/keycloak/modules/system/layers/base/com/mysql/jdbc/main/module.xml
 

@@ -73,8 +73,7 @@ if [ "$DB_VENDOR" != "h2" ]; then
 fi
 
 
-
+echo "STARTING KEYCLOAK"
 # Start Keycloak
-
-exec /opt/jboss/keycloak/bin/standalone.sh $@
+exec /opt/jboss/keycloak/bin/standalone.sh -Dkeycloak.migration.action=import -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=/opt/realm-export.json -Dkeycloak.migration.strategy=OVERWRITE_EXISTING  $@
 exit $?
