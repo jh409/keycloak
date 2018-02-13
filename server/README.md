@@ -3,15 +3,25 @@
 Keycloak Server Docker image.
 
 
+## CUSTOM USAGE
+
+To build
+
+    docker build -t keycloak-jack .
+
+To run
+
+    docker run -p 8080:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin keycloak-jack
+
 
 ## Usage
 
 To boot in standalone mode
 
     docker run jboss/keycloak
-    
-    
-    
+
+
+
 ## Expose on localhost
 
 To be able to open Keycloak on localhost map port 8080 locally
@@ -22,7 +32,7 @@ To be able to open Keycloak on localhost map port 8080 locally
 
 ## Creating admin account
 
-By default there is no admin user created so you won't be able to login to the admin console. To create an admin account 
+By default there is no admin user created so you won't be able to login to the admin console. To create an admin account
 you need to use environment variables to pass in an initial username and password. This is done by running:
 
     docker run -e KEYCLOAK_USER=<USERNAME> -e KEYCLOAK_PASSWORD=<PASSWORD> jboss/keycloak
@@ -44,7 +54,7 @@ on the following rules:
 
 - Use PostgreSQL if `postgres` hostname resolves or `POSTGRES_ADDR` environment variable is set
 - Use MySQL if `mysql` hostname resolves or `MYSQL_ADDR` environment variable is set
-- Use embedded H2 if none of above and `DB_VENDOR` environment variable not set 
+- Use embedded H2 if none of above and `DB_VENDOR` environment variable not set
 
 You can also use the `DB_VENDOR` environment variable to explicitly specify the database:
 
@@ -65,7 +75,7 @@ You can also use the `DB_VENDOR` environment variable to explicitly specify the 
 First start a MySQL instance using the MySQL docker image:
 
     docker run --name mysql -d --net keycloak-network -e MYSQL_DATABASE=keycloak -e MYSQL_USER=keycloak -e MYSQL_PASSWORD=password -e MYSQL_ROOT_PASSWORD=root_password mysql
-    
+
 If you choose a different container name to `mysql` you need to specify the `MYSQL_ADDR` environment variable.
 
 #### Start a Keycloak instance
@@ -109,8 +119,8 @@ Specify password for MySQL database (optional, default is `password`).
 First start a PostgreSQL instance using the PostgreSQL docker image:
 
     docker run -d --name postgres --net keycloak-network -e POSTGRES_DB=keycloak -e POSTGRES_USER=keycloak -e POSTGRES_PASSWORD=password postgres
-    
-If you choose a different container name to `postgres` you need to specify the `POSTGRES_ADDR` environment variable. 
+
+If you choose a different container name to `postgres` you need to specify the `POSTGRES_ADDR` environment variable.
 
 #### Start a Keycloak instance
 
@@ -167,7 +177,7 @@ To add a custom theme extend the Keycloak image and add the theme to the `/opt/j
 
 ## Adding custom provider
 
-To add a custom provider extend the Keycloak image and add your provider to the `/opt/jboss/keycloak/standalone/deployments/` 
+To add a custom provider extend the Keycloak image and add your provider to the `/opt/jboss/keycloak/standalone/deployments/`
 directory.
 
 
@@ -190,6 +200,6 @@ When running Keycloak behind a proxy, you will need to enable proxy address forw
 
 ## Other details
 
-This image extends the [`jboss/base-jdk`](https://github.com/JBoss-Dockerfiles/base-jdk) image which adds the OpenJDK 
-distribution on top of the [`jboss/base`](https://github.com/JBoss-Dockerfiles/base) image. Please refer to the README.md 
+This image extends the [`jboss/base-jdk`](https://github.com/JBoss-Dockerfiles/base-jdk) image which adds the OpenJDK
+distribution on top of the [`jboss/base`](https://github.com/JBoss-Dockerfiles/base) image. Please refer to the README.md
 for selected images for more info.
